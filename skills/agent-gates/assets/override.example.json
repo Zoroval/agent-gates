@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "pull_request": 123,
+  "change_fingerprint": "the exact 64-character fingerprint printed by the gate",
+  "approved_by": "your-github-username",
+  "approved_at": "2026-01-01T12:00:00Z",
+  "reason": "Why this exact change is merged without a passing experiment.",
+  "risk": "What could regress, how you will notice in production, and how you will roll back.",
+  "acknowledgement": "I consciously accept merging this exact intelligence change without a passing experiment."
+}

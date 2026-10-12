@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "experiment_directory": "evals/experiments",
+  "experiment_max_age_days": 45,
+  "minimum_cases_by_stage": {
+    "retrieval": 20,
+    "support_reply": 20,
+    "judge": 10
+  },
+  "override": {
+    "directory": ".github/intelligence-overrides",
+    "approvers": ["your-github-username"],
+    "max_age_days": 7,
+    "acknowledgement": "I consciously accept merging this exact intelligence change without a passing experiment."
+  },
+  "rules": [
+    {
+      "id": "support-reply-prompt",
+      "paths": ["prompts/support_reply*.md", "src/support/context_builder.py"],
+      "stages": ["support_reply"]
+    },
+    {
+      "id": "retrieval-ranking",
+      "paths": ["src/retrieval/*.py"],
+      "stages": ["retrieval", "support_reply"]
+    },
+    {
+      "id": "judge-prompt-and-parser",
+      "paths": ["src/judge/prompt.py", "src/judge/parse_verdict.py"],
+      "stages": ["judge"]
+    },
+    {
+      "id": "model-runtime-settings",
+      "paths": ["src/settings.py"],
+      "line_patterns": ["SUPPORT_MODEL", "SUPPORT_TEMPERATURE", "JUDGE_MODEL", "JUDGE_REASONING"],
+      "stages": ["support_reply", "judge"]
+    }
+  ]
+}

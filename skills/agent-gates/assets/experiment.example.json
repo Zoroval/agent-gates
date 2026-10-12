@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "support-reply-prompt-candidate-YYYY-MM-DD",
+  "change_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+  "affected_stages": ["support_reply"],
+  "run": {
+    "completed_at": "2026-01-01T12:00:00Z",
+    "runner": "offline-replay",
+    "runner_version": "commit-sha-or-harness-version"
+  },
+  "dataset": {
+    "id": "private-support-sample",
+    "fingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+    "case_count": 50,
+    "breakdown": {
+      "known_good": 30,
+      "known_bad": 20
+    }
+  },
+  "baseline": {
+    "name": "prompt at the base branch",
+    "artifact_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "candidate": {
+    "name": "prompt in this pull request",
+    "artifact_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "results": [
+    {
+      "stage": "support_reply",
+      "kind": "quality",
+      "metric": "graded_pass_rate",
+      "direction": "higher_is_better",
+      "baseline": 0.82,
+      "candidate": 0.86,
+      "minimum": 0.8,
+      "maximum_regression": 0.0,
+      "passed": true
+    },
+    {
+      "stage": "support_reply",
+      "kind": "cost",
+      "metric": "usd_per_1000_replies",
+      "direction": "lower_is_better",
+      "baseline": 4.1,
+      "candidate": 4.3,
+      "maximum": 5.0,
+      "maximum_regression": 0.5,
+      "passed": true
+    }
+  ],
+  "decision": "pass",
+  "why_better": "Explain the measured quality, safety, cost or latency change and why it applies to this exact diff.",
+  "limitations": [
+    "Name what the sample does not cover: missing classes, small size, drift, untested languages."
+  ]
+}

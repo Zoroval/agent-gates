@@ -1,0 +1,29 @@
+name: Intelligence Change Gate
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  intelligence-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      # Standard library only: the gate runs before any dependency is installed.
+      - name: Require evidence for protected intelligence changes
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: >-
+          python tools/validate_intelligence_change.py
+          --base "$BASE_SHA"
+          --head "$HEAD_SHA"
+          --pr-number "$PR_NUMBER"
